@@ -1,0 +1,24 @@
+<% title 'Forums' %>
+<strong>Foruns</strong>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @forums.each do |forum| %>
+  <tr>
+    <td><%= link_to forum.nome, forum %></td>
+    <%if current_user.role == 'coordenacao_pedagogica'%>
+    <td><%= link_to 'Editar', edit_forum_path(forum) %></td>
+    <td><%= link_to 'Deletar', forum, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%if current_user.role == 'coordenacao_pedagogica'%>
+<%= link_to 'Novo forum', new_forum_path %>
+<%end%>

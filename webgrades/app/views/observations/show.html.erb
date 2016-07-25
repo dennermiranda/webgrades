@@ -1,0 +1,24 @@
+<% title "Detalhes da observação" %>
+<table>
+  <tr>
+    <td>Autor:<strong><% if @observation.user_role == 'professor'%> <%=@professor.first.pessoa.nome_completo%> <%else%> <%= 'Coordenação' %> <%end%></strong></td>
+  </tr>
+  <tr>
+    <td>Contato:<strong><%= @observation.user.email %></strong></td>
+  </tr>
+</table>
+<p>
+  <b>Conteudo:</b>
+  <%= @observation.conteudo %>
+</p>
+
+<p>
+  <b>Tipo de observação:</b>
+  <%= @observation.observation_type %>
+</p>
+
+<%= link_to 'Enviar mensagem para autor', new_message_path(:receiver_id => @observation.user_id) %> |
+<%if @observation.user_id == current_user.id%>
+<%= link_to 'Editar', edit_observation_path(@observation) %> |
+<%end%>
+<%= link_to 'Voltar', :back %>

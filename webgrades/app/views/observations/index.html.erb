@@ -1,0 +1,29 @@
+<h1>Listing observations</h1>
+
+<table border="1">
+  <tr>
+    <th>Conteúdo</th>
+    <th>Tipo de observação</th>
+    <th>Nome do Aluno</th>
+    
+  </tr>
+
+<% @observations.each do |observation| %>
+  <tr>
+    <td><%= observation.conteudo %></td>
+    <td><%= observation.observation_type %></td>
+    <%if observation.aluno != nil%>
+      <td><%= observation.aluno.pessoa.nome_completo  %></td>
+    <%else%>
+      <td><%=%></td>
+    <%end%>
+    <td><%= link_to 'Mostrar', observation %></td>
+    <% if current_user.role != 'aluno' and current_user.role != 'responsavel' %>
+    <td><%= link_to 'Editar', edit_observation_path(observation) %></td>
+    <td><%= link_to 'Apagar', observation, :confirm => 'Tem certeza?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />

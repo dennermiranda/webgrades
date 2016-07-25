@@ -1,0 +1,32 @@
+<% title 'Mensagens' %>
+
+<table border= 1px>
+  <tr>
+    <th>Assunto</th>
+    <th></th>
+    <% if @area != 'outbox' %>
+    <th></th>
+    <th>Remetente</th>
+    <%end %>
+    
+    
+  </tr>
+  
+
+    <% @messages.each do |message| %>
+      <tr>
+        <td><%= message.assunto %></td>
+        <td><%= link_to 'Mostrar', message %></td>
+        <% if @area != 'outbox' %>
+         <td><%= link_to 'responder', new_message_path(:receiver_id => message.id_sender) %></td>
+         <td><%=User.find(message.id_sender).email%></td>
+        <%end%>
+      </tr>
+   <% end %>
+
+</table>
+
+<br />
+<%= link_to 'Caixa de Entrada', messages_path %><br/>
+<%= link_to 'Caixa de Saída', messages_path(:area => 'outbox') %><br/>
+<%= link_to 'lidas', messages_path(:area => 'readbox') %><br/>

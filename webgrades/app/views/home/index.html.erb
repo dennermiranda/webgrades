@@ -1,0 +1,10 @@
+<% title "Pagina inicial" %>
+<ul>
+  
+  <% if current_user != nil  %>
+    <%if current_user.role == "coordenacao_pedagogica"  %>
+  <li><%=render 'user/link'%></li>
+  <li> <%= link_to('notas', coordenacao_pedagogica_curso_index_url ) %></li>
+    <% end %>
+  <% end %>
+</ul>

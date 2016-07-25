@@ -1,0 +1,40 @@
+<% title "Minhas notas" %>
+<%= stylesheet_link_tag "application" %>
+<table width =100%>
+  <tr>
+    <td>Nome do aluno: <strong><%=@pessoa.nome_completo%></strong></td>
+    <td>Responsável pelo aluno: <strong><%=@aluno.nome_responsavel%></strong></td>
+  </tr>
+  
+  <tr>
+    <td>
+      Curso: <%=@aluno_diario.first.diario.curso.nome%>
+    </td>
+  </tr>
+</table><br/>
+<table width=100%  border="1">
+  <tr>
+    <td><strong>Disciplina</strong></td>
+    <td><strong>1&deg;</strong></td>
+    <td><strong>2&deg;</strong></td>
+    <td><strong>3&deg;</strong></td>
+    <td><strong>4&deg;</strong></td>
+    <td><strong>5&deg;</strong></td>
+    <td><strong>6&deg;</strong></td>
+    <td><strong>7&deg;</strong></td>
+    <td><strong>8&deg;</strong></td>
+  </tr>
+  <% for aluno_diario in @aluno_diario %>
+  <tr>
+    <td><%= aluno_diario.diario.disciplina.nome %></td>
+    <td><%= aluno_diario.nota_01 %></td>
+    <td><%= aluno_diario.nota_02 %></td>
+    <td><%= aluno_diario.nota_03 %></td>
+    <td><%= aluno_diario.nota_04 %></td>
+    <td><%= aluno_diario.nota_05 %></td>
+    <td><%= aluno_diario.nota_06 %></td>
+    <td><%= aluno_diario.nota_07 %></td>
+    <td><%= aluno_diario.nota_08 %></td>
+  </tr>
+  <% end %>
+</table>

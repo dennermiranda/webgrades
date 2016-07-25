@@ -1,0 +1,25 @@
+<% title "Editar conta" %>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= f.error_messages %>
+
+  <p><%= f.label :email %><br />
+  <%= f.text_field :email %></p>
+
+  <p><%= f.label :senha %> <i>(deixe em branco caso não queira alterar)</i><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :confirmar_senha %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.label :senha_atual %> <i>(precisamos de sua senha para confimar as mudanças)</i><br />
+  <%= f.password_field :current_password %></p>
+
+  <p><%= f.submit "Confirmar" %></p>
+<% end %>
+
+<h3>Excluir conta</h3>
+
+<p> <%= link_to "excluir usuário", registration_path(resource_name), :confirm => "Tem certeza?", :method => :delete %>.</p>
+
+<%= link_to "voltar", :back %>

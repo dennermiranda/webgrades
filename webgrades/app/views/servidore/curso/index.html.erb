@@ -1,0 +1,25 @@
+<% title "Listagem de Turmas" %>
+<table>
+  <tr>
+    <td> Nome: <strong> <%= @professor.pessoa.nome_completo %></strong> </td>
+  </tr>
+</table>
+<br/>
+<table width = 100%>
+  <tr>
+    <td><strong>Curso</strong></td>
+    <td><strong>Turno</strong></td>
+    <td><strong>Módulo</strong></td>
+  </tr>
+  <% @professor.diarios.group_by(&:curso).each do |curso, diarios| %>
+  <tr>
+    <td><%= link_to curso.nome, servidore_curso_url(curso) %></td>
+    <% diarios.group_by(&:turno_id).each do |turno, diario| %>
+    <td><%= turno %></td>
+      <% diario.group_by(&:modulo).each do |modulo, d| %>
+    <td><%= modulo %></td>
+      <% end %>
+    <% end %>
+  </tr>
+  <% end %>  
+</table>

@@ -1,0 +1,12 @@
+<%  title "Detalhes da Turma" %>
+
+<table width =100%>
+  <tr>
+    <td><strong>Disciplina</strong></td>
+  </tr>
+  <% for diario in @diario %>
+  <tr>
+    <td><%= link_to diario.disciplina.nome, servidore_disciplina_url(diario) %></td>
+  </tr>
+  <% end %>
+</table>

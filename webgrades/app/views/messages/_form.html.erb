@@ -1,0 +1,28 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> corrija este erro:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :conteudo %><br />
+    <%= f.text_area :conteudo %>
+  </div>
+  <div class="field">
+    <%= f.label :assunto %><br />
+    <%= f.text_field :assunto %>
+  </div>
+  <%= f.hidden_field 'id_receiver', :value => params[:receiver_id] %>
+  <%= f.hidden_field 'id_sender', :value => current_user.id %>
+  <%= f.hidden_field 'status', :value => false %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

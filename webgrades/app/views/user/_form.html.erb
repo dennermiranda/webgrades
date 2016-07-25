@@ -1,0 +1,21 @@
+<%= f.error_messages %>
+
+<p><%= f.label :email %><br />
+<%= f.text_field :email %></p>
+
+<p><%= f.label :senha %><br />
+<%= f.password_field :password %></p>
+
+<p><%= f.label :confirmar_senha %><br />
+<%= f.password_field :password_confirmation %></p>
+
+<p><%= f.label :tipo_de_conta %>: <%= f.collection_select :associable_type, User::ASSOCIABLES, :to_s, :humanize, {:include_blank => true} %></p>
+
+ <p><%= f.label :codigo_do_associacao %><i>(número de matricula do aluno ou código do professor)</i><br />
+  <%= f.text_field :associable_id %></p>
+
+<% if can? :manage, @users %>
+<p><%= f.label :autorizacao %>: <br/><%= f.collection_select :role, User::ROLES, :to_s, :humanize, {:include_blank => true} %></p>
+<% end %>
+
+<p><%= f.submit "Confirmar" %></p>

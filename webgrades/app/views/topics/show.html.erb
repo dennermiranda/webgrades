@@ -1,0 +1,21 @@
+<%  title  @topic.nome%>
+<p id="notice"><%= notice %></p>
+Topico: <strong><i><%=@topic.nome%></i></strong>
+<table>
+  <tr>
+    <td><strong>Post:</strong></td>
+    <td><strong>Conteudo:</strong></td>
+    <td><strong>autor</strong></td>
+  </tr>
+  <tr>
+    <% for post in @topic.posts %>
+    <td><%= post.nome %></td>
+    <td><%= post.conteudo %></td>
+    <td><%= post.user.email %></td>
+    <%end%>
+  </tr>
+</table>
+
+<%= link_to 'Novo Post', new_post_path(:topic_id => @topic.id) %> |
+<%= link_to 'Editar', edit_topic_path(@topic) %> |
+<%= link_to 'Voltar', :back %>

@@ -1,0 +1,30 @@
+<%  title "Listagem de Turmas" %>
+<table width=70%>
+  <tr>
+    <td>Email: <strong><%= current_user.email %></strong></td>
+  </tr>
+  <tr>
+    <td>Nível de autorização: <strong><%=  current_user.role%></strong></td>
+  </tr>
+</table>
+<br/>
+<table>
+  <tr>
+    <td><strong>Sala</strong> </td>
+    <td><strong>Curso</strong></td>
+    <td><strong>Turno</strong></td>
+    <td><strong>Módulo</strong></td>
+  </tr>
+  <%@diarios.group_by(&:curso).each do |curso, diarios|%>
+  <tr>
+    <td> <%= link_to diarios.first.sala.nome, coordenacao_pedagogica_curso_url(curso)%> | <%=  link_to 'Notificar todas as Turmas ', new_notification_path(:curso_id => curso.id) %> | <%=  link_to ' Notificar Turma', new_notification_path(:curso_id => curso.id, :sala_id =>diarios.first.sala.id)%></td>
+    <td> <%= curso.nome%> </td>
+    <%diarios.group_by(&:turno_id).each do |turno, diario|%>
+    <td> <%=turno%> </td>
+      <%diario.group_by(&:modulo).each do |modulo, d|%>
+    <td><%= modulo %></td>
+      <%end%>
+    <%end%>
+  </tr>
+  <%end%>
+</table>

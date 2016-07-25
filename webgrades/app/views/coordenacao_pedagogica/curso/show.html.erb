@@ -1,0 +1,13 @@
+<% title "Detalhes da Turma" %>
+<table width = 100%>
+  <tr>
+    <td><strong>Disciplina</strong></td>
+    <td><strong>Sigla</strong></td>
+  </tr>
+  <%for diario in @diarios%>
+  <tr>
+    <td> <%= link_to diario.disciplina.nome, coordenacao_pedagogica_disciplina_url(diario) %> </td>
+    <td><%= diario.disciplina.sigla %></td>
+  </tr>
+  <%end%>
+</table>

@@ -1,0 +1,11 @@
+<% title "Controle de Usuários" %>
+
+<% if can? :manage, @users %>
+  <p>Olá, você é um Administrador</p>
+  <h2>Usuários</h2>
+  <% for user in @user %>
+    <p><%= user.email %> <%= link_to "Editar usuário", edit_user_path(user) %> <%= link_to "Excluir usuário", user, :confirm => "Tem certeza?", :method => :delete %>
+  <% end %>
+<% else %>
+  <p>Olá, você não tem autorização para visualisar esta área.</p>
+<% end %>

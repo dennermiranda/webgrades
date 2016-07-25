@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id ="wrapper">
+      <div id = "header">
+      </div>
+      <div id ="nav">
+          <ul>
+            <li><%= link_to('Home',root_path)%></li>
+            <%= render 'devise/menu/registration_items' %>
+            <%= render 'devise/menu/login_items' %>
+            <%if user_signed_in?%>
+              <li> <%= link_to('Observações', observations_path) %>  </li>
+              <li> <%= link_to('Notificações', notifications_path) %>  </li>
+              <li> <%= link_to('Mensagens', messages_path) %>  </li>
+              <li> <%= link_to('Forum', forums_path) %>  </li>
+              <%if current_user.role == 'aluno' || current_user.role == 'responsavel'%>
+                <li><%= link_to('notas',aluno_root_path) %></li>
+              <%elsif current_user.role == 'professor'%>
+                <li> <%= link_to('notas',servidore_curso_index_path) %> </li>
+              <%elsif current_user.role =='coordenacao_pedagogica'%>
+                <li> <%= link_to('notas', coordenacao_pedagogica_curso_index_path) %> </li>
+              <% end %>
+            <%end%>
+          </ul>
+        </div>
+      <div id="container">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+      
+        <%= yield %>
+      </div>
+      
+    </div>
+  </body>
+</html>

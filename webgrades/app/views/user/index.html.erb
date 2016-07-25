@@ -1,0 +1,30 @@
+<% title "Controle de Usuários" %>
+
+<% if can? :manage, @users %>
+  <p>Olá, você é um Administrador</p>
+  <h2>Usuários</h2>
+  <table>
+    <tr>
+      <td><strong>Email</strong> </td>
+      <td> <strong>role</strong> </td>
+      <td> <strong>Data de criação</strong> </td>
+      <th></th>
+      <th></th>
+      
+    </tr>
+  <% for user in @users %>
+    <tr>
+    <td><%= user.email %></td>
+    <td><%= user.role %></td>
+    <td> <%= user.created_at %> </td>
+    <td><%= link_to "Editar usuário", edit_user_path(user) %></td>
+    <td><%= link_to "Excluir usuário", user, :confirm => "Tem certeza?", :method => :delete %></td>
+    </tr>
+  <% end %>
+  </table>
+  <p><%= link_to "Novo usuário", new_user_path %></p>
+<%= link_to "voltar", :back %>
+<% else %>
+  <p>Olá, você não tem autorização para visualisar esta área.</p>
+<% end %>
+

@@ -1,0 +1,8 @@
+<ul class = "hmenu">
+	<%= stylesheet_link_tag "menu" %>
+	<%= render 'devise/menu/registration_items' %>
+	<%= render 'devise/menu/login_items' %>
+	<% if can? :manage, @users %>
+	<p><%= link_to('Gerenciar usuários',index_user_path) %></p>
+	<% end %>
+</ul>

@@ -1,0 +1,57 @@
+<%  title "Alunos e notas" %>
+<% for aluno_diario in @aluno_diario %>
+<table width =100%>
+  <tr>
+    <td>Nome do aluno: <strong><%= aluno_diario.aluno.pessoa.nome_completo%></strong></td>
+    <td>Responsável pelo aluno: <strong><%= aluno_diario.aluno.nome_responsavel%></strong></td>
+  </tr>
+  
+  <tr>
+    <td>
+      Curso: <%= aluno_diario.diario.curso.nome%>
+      <td><%=  link_to 'Postar Observação', new_observation_url(:aluno_id => aluno_diario.aluno) %></td>
+          <%for user_aluno in @user_aluno %>
+      <% if user_aluno.associable_id == aluno_diario.aluno.id %>
+       <td><%= link_to 'Enviar Mensagem', new_message_url(:receiver_id => user_aluno.id) %></td>
+      <%end%>
+      <% end %>
+       <% count = 0 %>
+    <%  if @user_responsavel != nil%>
+      <%for user_responsavel in @user_responsavel %>
+      <% if user_responsavel.associable_id == aluno_diario.aluno.id %>
+        <td><%= link_to 'Enviar Mensagem para o responsável', new_message_url(:receiver_id => user_aluno.id) %></td>
+        <% count = count +1 %>
+      <%end%>
+      <%end%>
+      <% if count == 0 %>
+      <td><i>O responsável pelo aluno não está cadastrado no sistema</i></td>
+      <%end%>
+    <%end%>
+    </td>
+  </tr>
+</table>
+<table width=100%  border="1">
+  <tr>
+    <td><strong>Disciplina</strong></td>
+    <td><strong>1&deg;</strong></td>
+    <td><strong>2&deg;</strong></td>
+    <td><strong>3&deg;</strong></td>
+    <td><strong>4&deg;</strong></td>
+    <td><strong>5&deg;</strong></td>
+    <td><strong>6&deg;</strong></td>
+    <td><strong>7&deg;</strong></td>
+    <td><strong>8&deg;</strong></td>
+  </tr> 
+  <tr>
+    <td><%= aluno_diario.diario.disciplina.nome %></td>
+    <td><%= aluno_diario.nota_01 %></td>
+    <td><%= aluno_diario.nota_02 %></td>
+    <td><%= aluno_diario.nota_03 %></td>
+    <td><%= aluno_diario.nota_04 %></td>
+    <td><%= aluno_diario.nota_05 %></td>
+    <td><%= aluno_diario.nota_06 %></td>
+    <td><%= aluno_diario.nota_07 %></td>
+    <td><%= aluno_diario.nota_08 %></td>
+  </tr>
+</table><br/>
+<% end %>

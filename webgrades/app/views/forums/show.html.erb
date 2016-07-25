@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<table border ="1">
+  <tr>
+    <td><strong>Topico</strong></td>
+    <td><strong>Autor</strong></td>
+  </tr>
+  <% for topic in @forum.topics %>
+  <td><%= link_to topic.nome, topic %></td>
+  <td><%= topic.user.email %></td>
+  <%end%>
+</table>
+
+
+<%= link_to 'Novo Tópico',new_topic_url(:forum_id => @forum.id) %>
+<%= link_to 'Editar', edit_forum_path(@forum) %> |
+<%= link_to 'Voltar', :back %>

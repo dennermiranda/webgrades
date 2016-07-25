@@ -1,0 +1,8 @@
+<h1>Editing notification</h1>
+<%if current_user.role != 'aluno' || current_user.role != 'responsavel'%>
+  <%= render 'form' %>
+<%else%>
+  Você não tem autorização para acessar esta área
+<%end%>
+  <%= link_to 'Show', @notification %> |
+  <%= link_to 'Back', notifications_path %>

@@ -1,0 +1,30 @@
+<%= form_for(@observation) do |f| %>
+  <% if @observation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@observation.errors.count, "error") %> -corrija este erro:</h2>
+
+      <ul>
+      <% @observation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :conteúdo %><br />
+    <%= f.text_area :conteudo %>
+  </div>
+  <div class="field">
+    <%= f.label :Tipo_de_observação %>:
+    <%=f.collection_select :observation_type, Observation::OBSERVATION_TYPE, :to_s, :humanize,{:include_blank => false}%>
+  </div>
+  <%if @observation.new_record?%>
+    <%= f.hidden_field 'aluno_id', :value => params[:aluno_id] %>
+    <%= f.hidden_field 'user_id', :value => current_user.id %>
+    <%= f.hidden_field 'user_role', :value => current_user.role %>
+  <%end%>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

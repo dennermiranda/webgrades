@@ -1,0 +1,39 @@
+<h1>Notificações</h1>
+
+<table>
+  <tr>
+    <th>Conteudo</th>
+    <th>Assunto</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+<%if current_user.role != 'aluno'%>
+  <% @notifications.each do |notification| %>
+    <tr>
+      <td><%= notification.conteudo %></td>
+      <td><%= notification.assunto %></td>
+      <td><%= link_to 'Mostrar', notification %></td>
+      <td><%= link_to 'Editar', edit_notification_path(notification) %></td>
+      <td><%= link_to 'Apagar', notification, :confirm => 'Tem certeza?', :method => :delete %></td>
+    </tr>
+  <% end %>
+<%else%>
+  <% @notifications.each do |notification| %>
+    <%if notification.sala_id == @aluno.aluno_diarios.first.diario.sala.id || notification.curso_id == @aluno.curso.id%>
+    <tr>
+      <td><%= notification.conteudo %></td>
+      <td><%= notification.assunto %></td>
+      <td><%= link_to 'Mostrar', notification %></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <%end%>
+  <% end %>
+<%end%>
+</table>
+
+<br />
+<%if current_user.role != 'aluno' && current_user.role != 'responsavel'%>
+<%= link_to 'Nova notificação', new_notification_path %>
+<%end%>
